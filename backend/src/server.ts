@@ -18,7 +18,6 @@ app.use(morgan("dev"))
 app.use(cors({
     origin: process.env.FRONTEND_URL
 }))
-app.use((_req, res) => res.status(404).json({ success: false, error: "Route not found" }));
 
 app.use("/api/employees", employeeRoutes)
 app.use(errorHandler)
