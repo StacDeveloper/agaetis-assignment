@@ -6,7 +6,7 @@ const empty: EmployeeInput = { name: "", email: "", role: "" };
 interface Props {
     editing: Employee | null;
     saving: boolean;
-    onSubmit: (values: EmployeeInput) => void;
+    onSubmit: (values: EmployeeInput) => Promise<boolean>;
     onCancel: () => void;
 }
 
@@ -20,9 +20,10 @@ export default function EmployeeForm({ editing, saving, onSubmit, onCancel }: Pr
     const set = (key: keyof EmployeeInput) => (e: React.ChangeEvent<HTMLInputElement>) =>
         setValues((v) => ({ ...v, [key]: e.target.value }));
 
-    const submit = (e: FormEvent) => {
+    const submit = async (e: FormEvent) => {
         e.preventDefault();
-        onSubmit(values);
+        const success = await onSubmit(values)
+        if (success) setValues(empty)
     };
 
     return (

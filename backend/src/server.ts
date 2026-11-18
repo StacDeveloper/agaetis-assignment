@@ -3,6 +3,8 @@ import employeeRoutes from './routes/employee.routes.js'
 import cors from 'cors'
 import { errorHandler } from './controllers/employee.controller.js'
 import { pginit } from './configs/db.js'
+
+
 const app = express()
 
 const PORT = process.env.PORT || 4000
